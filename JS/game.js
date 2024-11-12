@@ -69,9 +69,10 @@ const startGame = () => {
             break;
         }
 
-        inputLetter = inputLetter.toUpperCase();
 
         if (INPUT_VALIDATOR.test(inputLetter)) {
+            
+            inputLetter = inputLetter.toUpperCase();
 
             if (pickedAnimal.includes(inputLetter)) {
                 for (let index = 0; index < pickedAnimal.length; index++)
