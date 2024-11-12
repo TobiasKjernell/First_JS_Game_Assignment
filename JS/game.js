@@ -6,7 +6,7 @@ const titleEl = document.querySelector(".page-title");
 
 let animalPool = ["dog", "cat", "donkey", "horse", "pig", "rabbit", "anaconda", "bat", "antelope", "dolphin", "whale", "elk", "shark", "jaguar", "orca", "tarantula", "turtle", "whale"]
 let life = 8;
-let randomAnimalPick = "";
+let pickedAnimal = "";
 let wrongLettersGuessed = [];
 let visualOutput = [];
 
@@ -40,7 +40,7 @@ const paintHangman = () => {
 }
 
 const resetGame = () => {
-    randomAnimalPick = "";
+    pickedAnimal = "";
     visualOutput.length = 0;
     wrongLettersGuessed.length = 0;
     life = 8;
@@ -48,9 +48,9 @@ const resetGame = () => {
 
 const initSetup = () => {
 
-    randomAnimalPick = randomPickAnimal();
+    pickedAnimal = randomPickAnimal();
 
-    for (let index = 0; index < randomAnimalPick.length; index++) {
+    for (let index = 0; index < pickedAnimal.length; index++) {
         visualOutput.push("_");
     }
 }
@@ -73,14 +73,14 @@ const startGame = () => {
 
         if (INPUT_VALIDATOR.test(inputLetter)) {
 
-            if (randomAnimalPick.includes(inputLetter)) {
-                for (let index = 0; index < randomAnimalPick.length; index++)
-                    if (randomAnimalPick[index] === inputLetter)  //Wanted to try something else than indexOf/search
+            if (pickedAnimal.includes(inputLetter)) {
+                for (let index = 0; index < pickedAnimal.length; index++)
+                    if (pickedAnimal[index] === inputLetter)  //Wanted to try something else than indexOf/search
                         visualOutput[index] = inputLetter;
 
 
-                if (visualOutput.join("") === randomAnimalPick) {
-                    alert(`Woohoo!! You won!\nYou also had ${life} lives left!\nWinning word: ${randomAnimalPick}`)
+                if (visualOutput.join("") === pickedAnimal) {
+                    alert(`Woohoo!! You won!\nYou also had ${life} lives left!\nWinning word: ${pickedAnimal}`)
                     resetGame();
                     break;
                 }
@@ -90,7 +90,7 @@ const startGame = () => {
                 life--;
 
                 if (life === 0) {
-                    alert(`You lost! The right answer was ${randomAnimalPick}!\n ${paintHangman()}`);
+                    alert(`You lost! The right answer was ${pickedAnimal}!\n ${paintHangman()}`);
                     resetGame();
                     break;
                 }
