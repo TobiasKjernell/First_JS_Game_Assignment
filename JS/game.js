@@ -5,28 +5,53 @@ const INPUT_VALIDATOR = /^[a-zA-Z]{1,1}$/;
 const titleEl = document.querySelector(".page-title");
 
 let animalPool = ["dog", "cat", "donkey", "horse", "pig", "rabbit", "anaconda", "bat", "antelope", "dolphin", "whale", "elk", "shark", "jaguar", "orca", "tarantula", "turtle", "whale"]
-let life = 7;
-let randomPick = "";
+let life = 8;
+let randomAnimalPick = "";
 let wrongLettersGuessed = [];
-let outputString = [];
+let visualOutput = [];
 
 /* Functions */
 
 const randomPickAnimal = () => animalPool[Math.floor(Math.random() * animalPool.length)].toUpperCase();
 
+const paintHangman = () => {
+    switch (life) {
+        case 8:
+            return "\n" + "\n|" + "\n|" + "\n|" + "\n|" + "\n|" + "\n|_______________________\n";
+        case 7:
+            return "\n__________" + "\n|" + "\n|" + "\n|" + "\n|" + "\n|" + "\n|_______________________\n";
+        case 6:
+            return "\n__________" + "\n|             |" + "\n|" + "\n|" + "\n|" + "\n|" + "\n|_______________________\n";
+        case 5:
+            return "\n__________" + "\n|             |" + "\n|            O" + "\n|" + "\n|" + "\n|" + "\n|_______________________\n";
+        case 4:
+            return "\n__________" + "\n|             |" + "\n|            O" + "\n|             |" + "\n|" + "\n|" + "\n|_______________________\n";
+        case 3:
+            return "\n__________" + "\n|             |" + "\n|            O" + "\n|         ---|" + "\n|" + "\n|" + "\n|_______________________\n";
+        case 2:
+            return "\n__________" + "\n|             |" + "\n|            O" + "\n|         ---|---" + "\n|" + "\n|" + "\n|_______________________\n";
+        case 1:
+            return "\n__________" + "\n|             |" + "\n|            O" + "\n|         ---|---" + "\n|            /" + "\n|          /" + "\n|_______________________\n";
+        case 0:
+            return "\n__________" + "\n|             |" + "\n|            O" + "\n|         ---|---" + "\n|            /\\" + "\n|          /    \\" + "\n|_______________________";
+        default:
+            return "Error";
+    }
+}
+
 const resetGame = () => {
-    randomPick = "";
-    outputString.length = 0;
+    randomAnimalPick = "";
+    visualOutput.length = 0;
     wrongLettersGuessed.length = 0;
-    life = 7;
+    life = 8;
 }
 
 const initSetup = () => {
 
-    randomPick = randomPickAnimal();
+    randomAnimalPick = randomPickAnimal();
 
-    for (let index = 0; index < randomPick.length; index++) {
-        outputString.push("_");
+    for (let index = 0; index < randomAnimalPick.length; index++) {
+        visualOutput.push("_");
     }
 }
 
@@ -36,7 +61,7 @@ const startGame = () => {
 
     while (life > 0) {
 
-        let choseALetter = prompt(`[Theme: Animals]\n\nPick a letter! (Doesn't matter if it's big or small)\nWrong guessed letters: ${wrongLettersGuessed}\nLives left: ${life}\n\n\n${outputString.join(" ")}`);
+        let choseALetter = prompt(`[Theme: Animals]\n\nPick a letter! (Doesn't matter if it's big or small)\nWrong guessed letters: ${wrongLettersGuessed}\nLives left: ${life}\n ${visualOutput.join(" ")}${paintHangman()}`);
 
         if (choseALetter === null) {
             alert("Game canceled!")
@@ -48,14 +73,14 @@ const startGame = () => {
 
         if (INPUT_VALIDATOR.test(choseALetter)) {
 
-            if (randomPick.includes(choseALetter)) {
-                for (let index = 0; index < randomPick.length; index++) {
-                    if (randomPick[index] === choseALetter)  //Wanted to try something else than indexOf
-                        outputString[index] = choseALetter;
+            if (randomAnimalPick.includes(choseALetter)) {
+                for (let index = 0; index < randomAnimalPick.length; index++)
+                    if (randomAnimalPick[index] === choseALetter)  //Wanted to try something else than indexOf/search
+                        visualOutput[index] = choseALetter;
 
-                }
-                if (outputString.join("") === randomPick) {
-                    alert(`Woohoo!! You won!\nYou also had ${life} lives left!\nWinning word: ${randomPick}`)
+
+                if (visualOutput.join("") === randomAnimalPick) {
+                    alert(`Woohoo!! You won!\nYou also had ${life} lives left!\nWinning word: ${randomAnimalPick}`)
                     resetGame();
                     break;
                 }
@@ -65,7 +90,7 @@ const startGame = () => {
                 life--;
 
                 if (life === 0) {
-                    alert(`You lost! The right answer was ${randomPick}!`);
+                    alert(`You lost! The right answer was ${randomAnimalPick}!\n ${paintHangman()}`);
                     resetGame();
                     break;
                 }
