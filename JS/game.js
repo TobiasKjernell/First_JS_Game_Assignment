@@ -61,22 +61,22 @@ const startGame = () => {
 
     while (life > 0) {
 
-        let choseALetter = prompt(`[Theme: Animals]\n\nPick a letter! (Doesn't matter if it's big or small)\nWrong guessed letters: ${wrongLettersGuessed}\nLives left: ${life}\n ${visualOutput.join(" ")}${paintHangman()}`);
+        let inputLetter = prompt(`[Theme: Animals]\n\nPick a letter! (Doesn't matter if it's big or small)\nWrong guessed letters: ${wrongLettersGuessed}\nLives left: ${life}\n ${visualOutput.join(" ")}${paintHangman()}`);
 
-        if (choseALetter === null) {
+        if (inputLetter === null) {
             alert("Game canceled!")
             resetGame();
             break;
         }
 
-        choseALetter = choseALetter.toUpperCase();
+        inputLetter = inputLetter.toUpperCase();
 
-        if (INPUT_VALIDATOR.test(choseALetter)) {
+        if (INPUT_VALIDATOR.test(inputLetter)) {
 
-            if (randomAnimalPick.includes(choseALetter)) {
+            if (randomAnimalPick.includes(inputLetter)) {
                 for (let index = 0; index < randomAnimalPick.length; index++)
-                    if (randomAnimalPick[index] === choseALetter)  //Wanted to try something else than indexOf/search
-                        visualOutput[index] = choseALetter;
+                    if (randomAnimalPick[index] === inputLetter)  //Wanted to try something else than indexOf/search
+                        visualOutput[index] = inputLetter;
 
 
                 if (visualOutput.join("") === randomAnimalPick) {
@@ -95,11 +95,11 @@ const startGame = () => {
                     break;
                 }
 
-                if (!wrongLettersGuessed.includes(choseALetter)) {
-                    wrongLettersGuessed.push(choseALetter);
-                    alert(`Letter '${choseALetter}' doesn't exist in this word`)
+                if (!wrongLettersGuessed.includes(inputLetter)) {
+                    wrongLettersGuessed.push(inputLetter);
+                    alert(`Letter '${inputLetter}' doesn't exist in this word`)
                 } else
-                    alert(`Letter ${choseALetter} is wrong and you also have guessed this letter already.`)
+                    alert(`Letter ${inputLetter} is wrong and you also have guessed this letter already.`)
             }
 
         } else
