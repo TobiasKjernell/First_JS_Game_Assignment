@@ -69,7 +69,6 @@ const startGame = () => {
             break;
         }
 
-
         if (INPUT_VALIDATOR.test(inputLetter)) {
             
             inputLetter = inputLetter.toUpperCase();

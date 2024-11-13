@@ -7,3 +7,7 @@ Should make a replica/inspiration game of Hearthstone if there's not any other d
 Still trying to reach some c# and also Unity functions, need to remap some thinking.
 
 Spend some more time with regular expressions.
+
+prompt and alert freezes all DOM changes, doesn't matter if you make changes above. Event chain seems to be paused until next frame.
+
+the foreach on array and do ' element = 0 ' in array doesnt work. Only with for-loop. Works abit different than C#'s foreach.
