@@ -93,13 +93,15 @@ const startGame = () => {
                     alert(`You lost! The right answer was ${pickedAnimal}!\n ${paintHangman()}`);
                     resetGame();
                     break;
+                } else {
+
+                    if (!wrongLettersGuessed.includes(inputLetter)) {
+                        wrongLettersGuessed.push(inputLetter);
+                        alert(`Letter '${inputLetter}' doesn't exist in this word`)
+                    } else
+                        alert(`Letter ${inputLetter} is wrong and you also have guessed this letter already.`)
                 }
 
-                if (!wrongLettersGuessed.includes(inputLetter)) {
-                    wrongLettersGuessed.push(inputLetter);
-                    alert(`Letter '${inputLetter}' doesn't exist in this word`)
-                } else
-                    alert(`Letter ${inputLetter} is wrong and you also have guessed this letter already.`)
             }
 
         } else
