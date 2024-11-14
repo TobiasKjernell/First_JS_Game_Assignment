@@ -3,8 +3,8 @@
 
 const INPUT_VALIDATOR = /^[a-zA-Z]{1,1}$/;
 const titleEl = document.querySelector(".page-title");
+const ANIMAL_POOL = ["dog", "cat", "donkey", "horse", "pig", "rabbit", "anaconda", "bat", "antelope", "dolphin", "whale", "elk", "shark", "jaguar", "orca", "tarantula", "turtle", "whale"]
 
-let animalPool = ["dog", "cat", "donkey", "horse", "pig", "rabbit", "anaconda", "bat", "antelope", "dolphin", "whale", "elk", "shark", "jaguar", "orca", "tarantula", "turtle", "whale"]
 let life = 8;
 let pickedAnimal = "";
 let wrongLettersGuessed = [];
@@ -12,7 +12,7 @@ let visualOutput = [];
 
 /* Functions */
 
-const randomPickAnimal = () => animalPool[Math.floor(Math.random() * animalPool.length)].toUpperCase();
+const randomPickAnimal = () => ANIMAL_POOL[Math.floor(Math.random() * ANIMAL_POOL.length)].toUpperCase();
 
 const paintHangman = () => {
     switch (life) {
@@ -70,7 +70,7 @@ const startGame = () => {
         }
 
         if (INPUT_VALIDATOR.test(inputLetter)) {
-            
+
             inputLetter = inputLetter.toUpperCase();
 
             if (pickedAnimal.includes(inputLetter)) {
