@@ -2,7 +2,7 @@
 /* Variables */
 
 const INPUT_VALIDATOR = /^[a-zA-Z]{1,1}$/;
-const titleEl = document.querySelector(".page-title");
+const TITLE_EL = document.querySelector(".page-title");
 const ANIMAL_POOL = ["dog", "cat", "donkey", "horse", "pig", "rabbit", "anaconda", "bat", "antelope", "dolphin", "whale", "elk", "shark", "jaguar", "orca", "tarantula", "turtle", "whale"]
 
 let life = 8;
@@ -109,7 +109,7 @@ const startGame = () => {
 
 /* Events */
 
-titleEl.addEventListener('click', () => {
+TITLE_EL.addEventListener('click', () => {
     startGame();
 })
 
